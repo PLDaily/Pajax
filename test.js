@@ -15,10 +15,10 @@
 	var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
 
 	
-	var hasOwnProperty   = ObjProto.hasOwnProperty;
+	var hasOwnProperty = ObjProto.hasOwnProperty;
 
   
-	var nativeKeys         = Object.keys;
+	var nativeKeys = Object.keys;
 
 	var isObject = function(obj) {
 		return typeof obj === 'object' && !!obj
@@ -56,8 +56,24 @@
 		data: '',
 		async: '',
 		dataType: '',
-	};
+	}
 
+	var defaultsFunc = {
+		'exts' : 'jpg,jpeg,gif,png,bmp,pdf,doc,docx,ppt,pptx,vcf,pot,potx,xls,xlsx,txt,rtf,et,wps,dps,mp3,mp4,wma,mid,ifc,rvt,obj', //支持的扩展名
+		'extsfun' : function(nowexts){ //不支持的扩展名回调
+			alert("不支持上传"+nowexts+"扩展名文件");
+		},
+		'maxsize' : 10485760, //最大10MB
+		'maxsizefun' : function(nowsize){ //超出大小回调
+			alert("最大支持10MB，现在"+nowsize);
+		},
+		'start' : function($setAfter){},
+		'progress' : function(percentage,$objProgress){},
+		'complete' : function(data,index){},
+		'failed' : function(msg){},
+		'cancel' : function(){},
+		'load': function(){}
+	};
 
 
 	var ajax = function(options) {
